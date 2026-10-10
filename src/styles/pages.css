@@ -32,7 +32,7 @@
 .field label { font-weight: 700; color: var(--text-strong); }
 .field input, .field textarea, .field select, .filters__year select {
   width: 100%; min-height: 48px; padding: var(--space-3) var(--space-4); background: var(--surface); color: var(--text-strong);
-  border: 1px solid var(--border-strong); border-radius: var(--radius-sm); }
+  border: 1px solid var(--text-muted); /* form control boundary must reach 3:1 (WCAG 1.4.11) */ border-radius: var(--radius-sm); }
 .field textarea { resize: vertical; min-height: 120px; }
 .field input:focus-visible, .field textarea:focus-visible, .field select:focus-visible, .filters__year select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-color: var(--accent); }
 .field [aria-invalid='true'] { border-color: var(--danger); border-width: 2px; }

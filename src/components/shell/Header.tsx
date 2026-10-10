@@ -58,6 +58,7 @@ export function Header() {
     };
     document.addEventListener('keydown', onKey);
     document.addEventListener('pointerdown', onDown);
+    document.documentElement.dataset.ready = 'true'; // interaction handlers are attached (used by tests)
     return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('pointerdown', onDown); };
   }, [open, close]);
 

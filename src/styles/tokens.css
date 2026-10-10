@@ -115,6 +115,10 @@
   --accent-hover: #6f5210;
   --accent-contrast: #ffffff;
   --focus: #6f5210;
+  --success: #1b6b43; /* darker semantic colours so text on paper passes AA */
+  --warning: #8a5a00;
+  --danger: #b3261e;
+  --info: #1f5fa8;
   --overlay: rgba(10, 10, 16, 0.5);
   color-scheme: light;
 }

@@ -35,6 +35,7 @@ test.describe('axe on interactive states', () => {
   });
   test('search open', async ({ page }) => {
     await page.goto('/?intro=skip');
+    await page.locator('html[data-ready=true]').waitFor({ state: 'attached' });
     await page.keyboard.press('/');
     await expect(page.getByRole('dialog', { name: 'Search BlackUnicorn' })).toBeVisible();
     await audit(page, 'search');

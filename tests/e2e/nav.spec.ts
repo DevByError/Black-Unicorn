@@ -63,6 +63,7 @@ test('search: / opens, typing finds results, Escape closes and returns focus', a
   await page.keyboard.press('Escape');
   await expect(dlg).toBeHidden();
   await expect(page.getByRole('button', { name: 'Search' })).toBeFocused();
+  await page.locator('html[data-ready=true]').waitFor({ state: 'attached' });
   await page.keyboard.press('/');
   await expect(dlg).toBeVisible();
   await page.keyboard.type('zzzzqq');
