@@ -1,0 +1,128 @@
+/* BlackUnicorn design tokens. Flat, solid colors only. No gradients (Part 2). */
+:root {
+  --bu-ink-950: #07070b;
+  --bu-ink-900: #0a0a10;
+  --bu-ink-850: #0f0f17;
+  --bu-ink-800: #14141e;
+  --bu-ink-700: #1d1d2a;
+  --bu-ink-600: #2a2a3a;
+  --bu-ink-500: #3a3a4e;
+  --bu-ink-400: #5b5b73;
+  --bu-ink-300: #8a8aa0;
+  --bu-ink-200: #b9b9cc;
+  --bu-ink-100: #e4e3ee;
+  --bu-ink-50: #f4f2fa;
+
+  --bu-gold-700: #8f6c16;
+  --bu-gold-600: #b38a22;
+  --bu-gold-500: #d4a83a;
+  --bu-gold-400: #e0bc5c;
+  --bu-gold-300: #ebd08a;
+
+  --bu-paper-50: #fbfaf6;
+  --bu-paper-100: #f2f0e8;
+  --bu-paper-200: #e4e1d4;
+
+  --bg: var(--bu-ink-900);
+  --bg-raised: var(--bu-ink-850);
+  --surface: var(--bu-ink-800);
+  --surface-hover: var(--bu-ink-700);
+  --border: var(--bu-ink-500);
+  --border-strong: var(--bu-ink-600);
+  --text-strong: var(--bu-ink-50);
+  --text: var(--bu-ink-200);
+  --text-muted: var(--bu-ink-300);
+  --accent: var(--bu-gold-500);
+  --accent-hover: var(--bu-gold-400);
+  --accent-contrast: var(--bu-ink-900);
+  --focus: var(--bu-gold-400);
+  --success: #5bd69a;
+  --warning: #f0b84a;
+  --danger: #ff6b6b;
+  --info: #6bb8ff;
+  --overlay: rgba(7, 7, 11, 0.72);
+
+  --font-display: 'Cinzel', 'Cinzel Fallback', 'Trajan Pro', 'Times New Roman', serif;
+  --font-body: 'Manrope', 'Manrope Fallback', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Mono Fallback', ui-monospace, Menlo, monospace;
+
+  --fs-eyebrow: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --fs-small: clamp(0.88rem, 0.86rem + 0.12vw, 0.95rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.22vw, 1.14rem);
+  --fs-lead: clamp(1.14rem, 1.06rem + 0.4vw, 1.4rem);
+  --fs-h4: clamp(1.25rem, 1.15rem + 0.5vw, 1.6rem);
+  --fs-h3: clamp(1.5rem, 1.3rem + 1vw, 2.1rem);
+  --fs-h2: clamp(2rem, 1.55rem + 2.2vw, 3.4rem);
+  --fs-h1: clamp(2.6rem, 1.8rem + 4vw, 5.2rem);
+  --fs-kpi: clamp(3rem, 2rem + 5vw, 6.4rem);
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+  --tracking-display: 0.04em;
+  --tracking-eyebrow: 0.12em;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+  --container: 1280px;
+  --container-wide: 1520px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --section-y: clamp(4rem, 3rem + 6vw, 9rem);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --header-h: 72px;
+  --header-h-compact: 60px;
+
+  --shadow-1: 0 1px 0 rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-2: 0 2px 0 rgba(0, 0, 0, 0.4), 0 24px 48px -20px rgba(0, 0, 0, 0.7);
+
+  --dur-instant: 90ms;
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 480ms;
+  --dur-slower: 720ms;
+  --dur-cinematic: 1100ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: var(--bu-paper-50);
+  --bg-raised: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: var(--bu-paper-100);
+  --border: var(--bu-paper-200);
+  --border-strong: #cfcbb9;
+  --text-strong: #0a0a10;
+  --text: #2a2a3a;
+  --text-muted: #5b5b73;
+  --accent: #8f6c16;
+  --accent-hover: #6f5210;
+  --accent-contrast: #ffffff;
+  --focus: #6f5210;
+  --overlay: rgba(10, 10, 16, 0.5);
+  color-scheme: light;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border: var(--border-strong);
+    --text-muted: var(--text);
+    --overlay: var(--bu-ink-950);
+  }
+}

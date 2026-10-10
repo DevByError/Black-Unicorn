@@ -1,0 +1,47 @@
+/* Self-hosted, latin subset only. Files live in /public/fonts so they can be preloaded by stable URL. */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/cinzel-600-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/manrope-latin-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-500-latin.woff2') format('woff2');
+}
+/* Size-adjusted fallbacks: metrics are approximations tuned to keep swap shift near zero. */
+@font-face {
+  font-family: 'Cinzel Fallback';
+  src: local('Times New Roman'), local('Times');
+  size-adjust: 112%;
+  ascent-override: 88%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Manrope Fallback';
+  src: local('Arial'), local('Helvetica');
+  size-adjust: 104%;
+  ascent-override: 96%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Mono Fallback';
+  src: local('Courier New'), local('Courier');
+  size-adjust: 96%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}

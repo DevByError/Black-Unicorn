@@ -1,0 +1,10 @@
+.site-header { position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--header-h); background: transparent;
+  border-bottom: 1px solid transparent; transition: transform var(--dur-base) var(--ease-standard), background var(--dur-base), border-color var(--dur-base); }
+.site-header[data-state='solid'], .site-header[data-state='hidden'] { background: var(--bg); border-bottom-color: var(--border); }
+.site-header__bar { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); }
+.site-header__nav ul { display: flex; gap: var(--space-5); }
+.logo { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--accent); min-height: 44px; }
+.logo__icon { height: 40px; width: calc(40px * 400 / 420); flex: none; }
+.logo__word { font-size: 1.25rem; letter-spacing: 0.1em; line-height: 1; color: var(--accent); white-space: nowrap; }
+.logo__word .char { display: inline-block; }
+.logo-progress { stroke-dasharray: 1; stroke-dashoffset: 1; }

@@ -1,0 +1,8 @@
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);
+@import '../styles/fonts.css';
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/shell.css';
+@import '../styles/sections.css';
+@import '../styles/pages.css';
