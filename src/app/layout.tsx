@@ -6,6 +6,10 @@ import { SkipLinks } from '@/components/shell/SkipLinks';
 import { Intro } from '@/components/intro/Intro';
 import { IntroController } from '@/components/intro/IntroController';
 import { Header } from '@/components/shell/Header';
+import { Footer } from '@/components/shell/Footer';
+import { Consent } from '@/components/shell/Consent';
+import { RouteAnnouncer } from '@/components/shell/RouteAnnouncer';
+import { Reveals } from '@/components/ui/Reveals';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -37,6 +41,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <IntroController />
         <Header />
         <main id="main" tabIndex={-1}>{children}</main>
+        <Footer />
+        <Consent />
+        <RouteAnnouncer />
+        <Reveals />
         <div id="live-region" className="visually-hidden" aria-live="polite" role="status" />
       </body>
     </html>

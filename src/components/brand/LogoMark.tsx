@@ -47,6 +47,7 @@ export function LogoMark({ variant = 'full', progress = false, id, className, ti
           cx={RING_CENTER.x}
           cy={RING_CENTER.y}
           r={PROGRESS_R}
+          pathLength={1}
           fill="none"
           stroke="currentColor"
           strokeWidth="10"
