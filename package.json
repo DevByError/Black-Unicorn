@@ -5,14 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/check-placeholders.mjs && next build",
+    "build": "node scripts/check-placeholders.mjs && next build && node scripts/make-headers.mjs",
     "start": "npx serve out",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "check:placeholders": "node scripts/check-placeholders.mjs",
-    "report:contrast": "node scripts/contrast-report.mjs"
+    "report:contrast": "node scripts/contrast-report.mjs",
+    "make:brand": "node --experimental-strip-types scripts/make-brand.mjs",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.3.0",
