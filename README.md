@@ -31,7 +31,7 @@ Add a project by appending an object to `projects.ts`; its case-study page, site
 
 ## The intro
 
-Modes are chosen by a pre-paint script (`src/lib/bootstrap.ts`): first visit = full (~6 s, skippable), later visits in the same day = short, same session = skip, reduced motion = ~1 s fade. Query flags: `?intro=skip`, `?intro=force`, `?intro=slow` (2x slower for review). A `?intro=debug` scrubber is **not** built. Without JavaScript, the overlay never shows and the page is fully usable; a CSS fallback also clears the overlay after 6.5 s if scripts stall.
+Modes are chosen by a pre-paint script (`src/lib/bootstrap.ts`): first visit = full (~6 s, skippable), a return visit within 7 days = short, repeat page loads in the same session = skip, reduced motion = ~1 s fade. Query flags: `?intro=skip`, `?intro=force`, `?intro=slow` (4x slower, for review). A `?intro=debug` scrubber is **not** built. Without JavaScript, the overlay never shows and the page is fully usable; a CSS fallback also clears the overlay after 6.5 s if scripts stall.
 
 ## Brand assets
 
