@@ -115,7 +115,7 @@ html:not(.js) .hero__controls { display: none; }
 .spot__seam { position: absolute; left: calc(50% - 1px); top: 0; width: 2px; height: 100%; background: var(--accent); transform: scaleY(0); transform-origin: top; z-index: 2; pointer-events: none; }
 .spot.is-in .spot__seam { transform: scaleY(1); transition: transform 700ms var(--ease-emphasis); }
 .spot__panel { position: relative; z-index: 3; padding-block: var(--space-7); }
-.spot__text { display: grid; gap: var(--space-4); justify-items: start; max-width: 40rem; padding: var(--space-6); background: var(--overlay); border-left: 2px solid var(--accent); }
+.spot__text { display: grid; gap: var(--space-4); justify-items: start; max-width: 40rem; padding: var(--space-6); background: var(--bg-raised); /* solid backing keeps text contrast independent of the image */ border-left: 2px solid var(--accent); }
 html:not(.js-motion) .spot__half, html:not(.js-motion) .spot__seam { transform: none; }
 @media (hover: none) { .spot__art-inner { inset: 0; transform: none !important; } }
 

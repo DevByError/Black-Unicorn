@@ -45,7 +45,7 @@ test('skip button fast-forwards to a clean final state', async ({ page }) => {
   await page.goto('/?intro=force');
   await page.locator('#intro-skip').click();
   await done(page, 6_000);
-  expect(await page.locator('[inert]').count()).toBe(0);
+  expect(await page.locator('body > header[inert], body > main[inert], body > footer[inert]').count()).toBe(0);
   expect(await page.evaluate(() => document.documentElement.classList.contains('is-intro'))).toBe(false);
   await expect(page.locator('#site-logo')).toBeVisible();
 });

@@ -9,7 +9,8 @@ export function finishIntro(played: boolean, extraCleanup?: () => void) {
   if (root.getAttribute('data-intro') === 'done') return;
   extraCleanup?.();
   root.classList.remove('is-intro', 'intro-handoff');
-  document.querySelectorAll('[inert]').forEach((n) => n.removeAttribute('inert'));
+  // Only the three page regions the intro made inert: carousel slides etc. use inert for their own reasons.
+  document.querySelectorAll('body > header, body > main, body > footer').forEach((n) => n.removeAttribute('inert'));
   document.getElementById('intro')?.remove();
   document.getElementById('intro-skip')?.remove();
   document.querySelectorAll('.intro__pulse').forEach((n) => n.remove());

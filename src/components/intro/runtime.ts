@@ -46,7 +46,7 @@ export async function startIntro(mode: IntroMode) {
   const overlay = q<HTMLElement>('#intro');
   if (!overlay) return finishIntro(false);
 
-  document.querySelectorAll('header, main, footer').forEach((n) => n.setAttribute('inert', ''));
+  document.querySelectorAll('body > header, body > main, body > footer').forEach((n) => n.setAttribute('inert', ''));
   rt.watchdog = window.setTimeout(() => end(rt, false), WATCHDOG_MS * (rt.slow ? 4 : 1));
 
   const fastForward = () => {

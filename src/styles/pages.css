@@ -65,7 +65,7 @@
 .case__toc a:hover { color: var(--accent); }
 .case__body { display: grid; gap: var(--space-8); min-width: 0; }
 .case__section { display: grid; gap: var(--space-4); }
-.case__num { font-size: var(--fs-kpi); line-height: 1; color: var(--border-strong); }
+.case__num { font-size: var(--fs-kpi); line-height: 1; color: var(--text-muted); }
 .case__quote { margin: 0; padding-left: var(--space-5); border-left: 2px solid var(--accent); display: grid; gap: var(--space-3); }
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--space-3); }
 .gallery__thumb { display: block; width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }

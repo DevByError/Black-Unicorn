@@ -47,7 +47,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
           <button type="button" className="icon-btn" onClick={onClose} aria-label="Close search"><Icon name="close" /></button>
         </div>
         <input
-          id="search-input" ref={input} className="search__input" type="search" value={q} autoComplete="off" spellCheck={false}
+          id="search-input" ref={input} className="search__input" type="text" role="searchbox" value={q} autoComplete="off" spellCheck={false}
           placeholder="Search projects, notes and services" onChange={(e) => setQ(e.target.value)}
         />
         <p className="visually-hidden" aria-live="polite">{q.trim() ? `${count} result${count === 1 ? '' : 's'}` : ''}</p>
