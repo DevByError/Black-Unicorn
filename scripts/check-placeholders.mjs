@@ -7,9 +7,12 @@ const dir = path.resolve('src/content');
 const found = [];
 for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
   const lines = fs.readFileSync(path.join(dir, file), 'utf8').split('\n');
+  let lastLabel;
   lines.forEach((line, i) => {
+    if (/^\s*(\*|\/\/|\/\*)/.test(line)) return; // documentation comments are not content
+    lastLabel = (line.match(/(?:slug|id|name|title):\s*'([^']+)'/) ?? [])[1] ?? lastLabel;
     if (/placeholder:\s*true/.test(line)) {
-      const label = (line.match(/(?:slug|id|name|title):\s*'([^']+)'/) ?? [])[1] ?? line.trim().slice(0, 60);
+      const label = (line.match(/(?:slug|id|name|title):\s*'([^']+)'/) ?? [])[1] ?? lastLabel ?? line.trim().slice(0, 60);
       found.push(`  src/content/${file}:${i + 1}  ${label}`);
     }
   });

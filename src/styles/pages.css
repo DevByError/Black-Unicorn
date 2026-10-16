@@ -47,9 +47,6 @@
 .form-note .h4 { display: flex; align-items: center; gap: var(--space-2); }
 .spinner { width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 700ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.cta .form-note { color: var(--text); }
-.cta .field__err { color: #5a0000; }
-[data-theme='light'] .cta .field__err { color: var(--danger); }
 .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-8); padding-bottom: var(--space-8); }
 @media (max-width: 899.98px) { .contact { grid-template-columns: 1fr; gap: var(--space-6); } }
 .contact__info { display: grid; gap: var(--space-5); align-content: start; }
@@ -57,6 +54,23 @@
 /* ---------- Case study ---------- */
 .cover { max-width: var(--container-wide); margin-inline: auto; padding-inline: var(--gutter); }
 .cover > * { width: 100% !important; border-radius: var(--radius-md); }
+/* Case-study image slider (ProjectHero). Flat: borders and solid fills only. */
+.phero { max-width: var(--container-wide); margin-inline: auto; padding-inline: var(--gutter); display: grid; gap: var(--space-4); }
+.phero__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); }
+.phero__track::-webkit-scrollbar { display: none; }
+.phero__track:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.phero__slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+.phero__slide > * { width: 100% !important; border: 0 !important; border-radius: 0 !important; }
+.phero__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.phero__count { color: var(--text-muted); letter-spacing: 0.08em; }
+.phero__btns { display: flex; gap: var(--space-2); }
+.phero__thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(96px, 160px); gap: var(--space-3); overflow-x: auto; padding-bottom: var(--space-1); scrollbar-width: thin; }
+.phero__thumb { display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); opacity: 0.7; transition: opacity var(--dur-fast), border-color var(--dur-fast); }
+.phero__thumb > * { width: 100% !important; border: 0 !important; }
+.phero__thumb:hover { opacity: 1; border-color: var(--border-strong); }
+.phero__thumb[aria-current='true'] { opacity: 1; border-color: var(--accent); outline: 1px solid var(--accent); outline-offset: 1px; }
+.phero__thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 .case { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 4fr); gap: var(--space-8); padding-block: var(--space-8); }
 @media (max-width: 899.98px) { .case { grid-template-columns: 1fr; gap: var(--space-5); } }
 .case__toc { position: sticky; top: calc(var(--header-h-compact) + var(--space-5)); align-self: start; display: grid; gap: var(--space-3); }

@@ -98,7 +98,7 @@ dialog::backdrop { background: var(--overlay); }
 .search__empty { display: grid; gap: var(--space-4); justify-items: start; padding-block: var(--space-6); }
 
 /* ---- Footer ---- */
-.site-footer { position: relative; overflow: hidden; background: var(--bg-raised); border-top: 1px solid var(--border); margin-top: var(--section-y); }
+.site-footer { position: relative; overflow: hidden; background: transparent; border-top: 1px solid var(--border); margin-top: var(--space-7); }
 .footer__pattern { position: absolute; width: 360px; opacity: 0.05; color: var(--accent); pointer-events: none; }
 .footer__pattern--l { left: -140px; bottom: -80px; }
 .footer__pattern--r { right: -140px; top: -80px; }

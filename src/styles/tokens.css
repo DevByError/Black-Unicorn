@@ -27,11 +27,11 @@
   --bg-raised: var(--bu-ink-850);
   --surface: var(--bu-ink-800);
   --surface-hover: var(--bu-ink-700);
-  --border: var(--bu-ink-500);
-  --border-strong: var(--bu-ink-600);
+  --border: #3c3c55;
+  --border-strong: #5d5d7a;
   --text-strong: var(--bu-ink-50);
   --text: var(--bu-ink-200);
-  --text-muted: var(--bu-ink-300);
+  --text-muted: #a6a6bf;
   --accent: var(--bu-gold-500);
   --accent-hover: var(--bu-gold-400);
   --accent-contrast: var(--bu-ink-900);
@@ -75,7 +75,7 @@
   --container: 1280px;
   --container-wide: 1520px;
   --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
-  --section-y: clamp(4rem, 3rem + 6vw, 9rem);
+  --section-y: clamp(3.5rem, 2.5rem + 4.5vw, 7rem);
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 14px;
@@ -102,24 +102,27 @@
 }
 
 [data-theme='light'] {
-  --bg: var(--bu-paper-50);
-  --bg-raised: #ffffff;
+  /* Light theme: deeper paper, white cards, dark borders and bronze gold so every layer is clearly separate. */
+  --bg: #f1eee3;
+  --bg-raised: #fffdf6;
   --surface: #ffffff;
-  --surface-hover: var(--bu-paper-100);
-  --border: var(--bu-paper-200);
-  --border-strong: #cfcbb9;
+  --surface-hover: #e9e4d2;
+  --border: #bfb8a0;
+  --border-strong: #7d7762;
   --text-strong: #0a0a10;
-  --text: #2a2a3a;
-  --text-muted: #5b5b73;
-  --accent: #8f6c16;
-  --accent-hover: #6f5210;
+  --text: #1f1f2c;
+  --text-muted: #45455b;
+  --accent: #7a5700;
+  --accent-hover: #5c4100;
   --accent-contrast: #ffffff;
-  --focus: #6f5210;
+  --focus: #5c4100;
   --success: #1b6b43; /* darker semantic colours so text on paper passes AA */
   --warning: #8a5a00;
   --danger: #b3261e;
   --info: #1f5fa8;
   --overlay: rgba(10, 10, 16, 0.5);
+  --shadow-1: 0 1px 0 rgba(10, 10, 16, 0.14), 0 6px 16px -10px rgba(10, 10, 16, 0.35);
+  --shadow-2: 0 2px 0 rgba(10, 10, 16, 0.16), 0 20px 40px -22px rgba(10, 10, 16, 0.45);
   color-scheme: light;
 }
 

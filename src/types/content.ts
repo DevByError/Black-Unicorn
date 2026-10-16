@@ -6,6 +6,8 @@ export interface ImageAsset {
   width: number;
   height: number;
   alt: string;
+  /** Optional responsive candidates, e.g. "/work/x/cover-800.webp 800w, /work/x/cover-1600.webp 1600w". */
+  srcSet?: string;
   focal?: [number, number];
 }
 
@@ -22,6 +24,8 @@ export interface Project {
   cover: ImageAsset;
   coverPortrait?: ImageAsset;
   thumb?: ImageAsset;
+  /** Images for the slider at the top of the case study. Omit (or give one) for a single plain cover. */
+  heroImages?: ImageAsset[];
   gallery?: ImageAsset[];
   challenge: string;
   approach: string;

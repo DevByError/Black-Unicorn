@@ -1,32 +1,19 @@
-/* Flat, solid colours only. Initial states are CSS so the overlay never flashes the finished logo. */
-.intro, .intro__skip { display: none; }
-html[data-intro='full'] .intro, html[data-intro='short'] .intro, html[data-intro='reduced'] .intro { display: block; }
-html[data-intro='full'] .intro__skip, html[data-intro='short'] .intro__skip { display: inline-flex; align-items: center; }
-html.is-intro { overflow: hidden; scrollbar-gutter: stable; }
-html.is-intro:not(.intro-handoff) #site-logo { visibility: hidden; } /* hidden but still measurable: the dock target */
+/* The intro is a full-screen video. Flat solid colours only; the overlay is plain black so the video's own dark bars blend in. */
+.intro { display: none; }
+html[data-intro='full'] .intro, html[data-intro='reduced'] .intro { display: block; }
+/* No scrollbar-gutter here: a reserved gutter cannot be painted over, so it showed as a pale strip beside the video. */
+html.is-intro { overflow: hidden; }
+html.is-intro:not(.intro-handoff) #site-logo { visibility: hidden; } /* the header logo appears as the video fades */
 
-.intro { position: fixed; inset: 0; z-index: 9000; color: var(--bu-gold-500); overflow: hidden;
-  /* Safety net: if scripts never run, the overlay still clears itself (Part 13.11). */
+.intro { position: fixed; inset: 0; z-index: 9000; background: #000; overflow: hidden; opacity: 1;
+  transition: opacity 700ms var(--ease-standard);
+  /* Safety net: if scripts never run, the overlay still clears itself. */
   animation: introFallback 600ms 6500ms forwards; }
 @keyframes introFallback { to { opacity: 0; visibility: hidden; } }
 .intro[data-state='running'], .intro[data-state='done'] { animation: none; }
-.intro__curtain { position: absolute; top: 0; bottom: 0; width: 50.2%; background: var(--bu-ink-950); will-change: transform; }
-.intro__curtain--left { left: 0; }
-.intro__curtain--right { right: 0; }
-.intro__stage { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center;
-  gap: clamp(12px, 2.4vh, 28px); visibility: hidden; }
-.intro[data-state='running'] .intro__stage, .intro[data-state='done'] .intro__stage { visibility: visible; }
-.intro__mark-wrap { width: clamp(180px, min(34vmin, 380px), 380px); aspect-ratio: 400 / 420; transform-origin: 50% 50%; }
-.intro__mark-wrap svg { width: 100%; height: 100%; overflow: visible; }
-.intro__word-clip { position: relative; overflow: hidden; padding: 0.15em 0.1em; }
-.intro__word { font-weight: 600; color: var(--bu-gold-500); font-size: clamp(1.5rem, 5.2vmin, 3.2rem); letter-spacing: 0.1em;
-  white-space: nowrap; line-height: 1; }
-.intro__word .char { display: inline-block; will-change: transform; }
-.intro__scan { position: absolute; top: 0; bottom: 0; left: 0; width: 6px; background: var(--bu-gold-300); opacity: 0; }
-.intro__sparks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.intro__pulse { will-change: transform, opacity; }
-.intro__skip { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
-  z-index: 9100; min-height: 44px; padding: 0 18px; border: 1px solid var(--bu-ink-600); background: var(--bu-ink-950);
-  color: var(--bu-ink-200); font: 500 0.85rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
-.intro__skip:hover { border-color: var(--bu-gold-500); color: var(--bu-gold-500); }
-.intro__skip:focus-visible { outline: 2px solid var(--bu-gold-400); outline-offset: 3px; }
+.intro.is-leaving { opacity: 0; }
+.intro.is-leaving-fast { opacity: 0; transition-duration: 280ms; }
+/* cover: fills any screen. The PC video is wide, the Mobile video is tall, so each crops very little on its own kind of screen. */
+.intro__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; opacity: 0; transition: opacity 500ms linear; }
+.intro__video.is-ready { opacity: 1; }
+

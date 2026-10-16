@@ -139,7 +139,7 @@ export function ContactForm({ variant = 'full' }: { variant?: 'compact' | 'full'
       {status === 'unconfigured' && <p role="alert" className="form-note form-note--err">This form is not connected yet: no form endpoint or contact email has been set. See the README.</p>}
 
       <button type="submit" className="btn btn--primary" disabled={submitting} aria-disabled={submitting}>
-        {submitting ? (<><span className="spinner" aria-hidden="true" />Sending…</>) : (<>Send message<Icon name="arrow-right" className="icon btn__arrow" /></>)}
+        {submitting ? (<><span className="spinner" aria-hidden="true" />Sending…</>) : (<>Send message</>)}
       </button>
       <p className="muted field__hint">By sending, you agree to our <Link href="/privacy" className="link-inline">privacy statement</Link>.</p>
     </form>

@@ -1,5 +1,5 @@
 'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { labelFor } from '@/content/projects';
 import { isMotionReduced } from '@/lib/useReducedMotion';
@@ -15,7 +15,6 @@ type GsapModule = typeof import('gsap');
  * and is skipped under reduced motion.
  */
 export function WorkIndex({ projects }: { projects: Project[] }) {
-  const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
   const d = params.get('d') ?? '';
@@ -23,6 +22,12 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
   const grid = useRef<HTMLUListElement>(null);
   const flip = useRef<{ Flip: FlipModule['Flip']; gsap: GsapModule['default'] } | null>(null);
   const pending = useRef<ReturnType<FlipModule['Flip']['getState']> | null>(null);
+
+  // Filters only change the query string, so update the URL in place. Next syncs useSearchParams with the native History
+  // API, which avoids a router round trip (and a layout/CSS refetch in dev) on every filter click. Back/forward still work.
+  const navigate = useCallback((qs: string) => {
+    window.history.pushState(null, '', qs ? `${pathname}?${qs}` : pathname);
+  }, [pathname]);
 
   const disciplines = useMemo(() => Array.from(new Set(projects.flatMap((p) => p.disciplines))), [projects]);
   const years = useMemo(() => Array.from(new Set(projects.map((p) => String(p.year)))).sort().reverse(), [projects]);
@@ -49,9 +54,8 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
     const next = new URLSearchParams(params.toString());
     if (value) next.set(key, value); else next.delete(key);
     if (flip.current && grid.current && !isMotionReduced()) pending.current = flip.current.Flip.getState(grid.current.querySelectorAll('.work-grid__item'));
-    const qs = next.toString();
-    router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [params, pathname, router]);
+    navigate(next.toString());
+  }, [params, navigate]);
 
   const label = d ? `Showing ${shown.length} ${labelFor(d).toLowerCase()} project${shown.length === 1 ? '' : 's'}` : y || shown.length !== projects.length ? `Showing ${shown.length} project${shown.length === 1 ? '' : 's'}` : 'Showing all projects';
   const newest = [...projects].sort((a, b) => b.published.localeCompare(a.published)).slice(0, 3);
@@ -70,7 +74,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
               {years.map((yr) => (<option key={yr} value={yr}>{yr}</option>))}
             </select>
           </label>
-          <button type="button" className="btn btn--ghost" disabled={!d && !y} onClick={() => { pending.current = null; router.push(pathname, { scroll: false }); }}>Clear filters</button>
+          <button type="button" className="btn btn--ghost" disabled={!d && !y} onClick={() => { pending.current = null; navigate(''); }}>Clear filters</button>
         </div>
       </div>
       <p className="mono muted" role="status" aria-live="polite">{label}</p>
@@ -81,7 +85,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
       ) : (
         <div className="empty">
           <p className="h3">No projects match these filters.</p>
-          <button type="button" className="btn btn--secondary" onClick={() => router.push(pathname, { scroll: false })}>Clear filters</button>
+          <button type="button" className="btn btn--secondary" onClick={() => navigate('')}>Clear filters</button>
           <h2 className="h4">Newest work</h2>
           <ul className="work-grid">{newest.map((p) => (<li key={p.slug} className="work-grid__item"><ProjectCard project={p} /></li>))}</ul>
         </div>

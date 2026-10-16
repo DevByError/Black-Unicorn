@@ -1,6 +1,6 @@
 # BlackUnicorn — portfolio & showcase site
 
-Static Next.js 15 (App Router, React 19, TypeScript strict, Tailwind v4, GSAP 3) site with the signature **Forge & Dock** intro. Flat 2D, dark-first, gold `#D4A83A` on ink. No gradients, no glows, no third-party trackers.
+Static Next.js 15 (App Router, React 19, TypeScript strict, Tailwind v4, GSAP 3) site with a full-screen video intro. Flat 2D, dark-first, gold `#D4A83A` on ink. No gradients, no glows, no third-party trackers.
 
 > **All copy, projects, metrics, team and partner entries are placeholders.** Nothing in this repo is a real claim about BlackUnicorn. The production build refuses to run until they are replaced (see "Replacing placeholders").
 
@@ -31,7 +31,11 @@ Add a project by appending an object to `projects.ts`; its case-study page, site
 
 ## The intro
 
-Modes are chosen by a pre-paint script (`src/lib/bootstrap.ts`): first visit = full (~6 s, skippable), a return visit within 7 days = short, repeat page loads in the same session = skip, reduced motion = ~1 s fade. Query flags: `?intro=skip`, `?intro=force`, `?intro=slow` (4x slower, for review). A `?intro=debug` scrubber is **not** built. Without JavaScript, the overlay never shows and the page is fully usable; a CSS fallback also clears the overlay after 6.5 s if scripts stall.
+The intro plays your two videos in `public/videos/`: `Gold Ribbons_Mobile.mp4` on portrait screens (phones) and `Gold Ribbons_PC.mp4` on everything else. To change the intro, replace those files (keep the names, or edit the two paths at the top of `src/components/intro/runtime.ts`). The last frame of each video is saved as `intro-end-mobile.webp` / `intro-end-pc.webp` and is shown instead of the video when motion is reduced or data saver is on; re-export those two when the video changes.
+
+Modes are chosen by a pre-paint script (`src/lib/bootstrap.ts`): every page load, including every refresh, plays the whole video from the first frame to the last (about 10 s); nothing is remembered between loads. Reduced motion = a still of the final frame for about a second. The intro has no buttons (no Skip, no Unmute): the video always plays muted, and Escape ends it early. A refresh also starts the page itself at the top (the browser's saved scroll position and any `#hash` are dropped). If the video cannot start within 5 seconds, or fails, the site is shown instead. Query flags: `?intro=skip` bypasses the intro, `?intro=force` plays it regardless of motion settings. Without JavaScript the overlay never shows. The video file is only downloaded when the intro actually plays.
+
+Tests: Playwright's bundled Chromium cannot decode H.264. To run the video tests there, make small WebM copies and point `INTRO_WEBM_DIR` at them (see the top of `tests/e2e/intro.spec.ts`); otherwise those tests are skipped.
 
 ## Brand assets
 

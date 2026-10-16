@@ -1,11 +1,10 @@
+import { Capabilities } from '@/components/home/Capabilities';
+import { HomeHero } from '@/components/home/HomeHero';
+import { Pipeline } from '@/components/home/Pipeline';
+import { Radar } from '@/components/home/Radar';
+import { TechTape } from '@/components/home/TechTape';
 import { ContactCta } from '@/components/sections/ContactCta';
-import { HeroCarousel } from '@/components/sections/HeroCarousel';
-import { IntentChips } from '@/components/sections/IntentChips';
 import { KpiBand } from '@/components/sections/KpiBand';
-import { NotesFeed } from '@/components/sections/NotesFeed';
-import { ProcessTabs } from '@/components/sections/ProcessTabs';
-import { Spotlight } from '@/components/sections/Spotlight';
-import { StackDirectory } from '@/components/sections/StackDirectory';
 import { TeamPreview } from '@/components/sections/TeamPreview';
 import { WorkRail } from '@/components/sections/WorkRail';
 import { OnThisPage } from '@/components/shell/OnThisPage';
@@ -13,25 +12,24 @@ import { metrics } from '@/content/metrics';
 import { notes } from '@/content/notes';
 import { process } from '@/content/process';
 import { projects } from '@/content/projects';
+import { services } from '@/content/services';
+import { site } from '@/content/site';
 import { stack } from '@/content/stack';
 import { team } from '@/content/team';
-import { site } from '@/content/site';
+import { getDevFeed } from '@/lib/feed';
 
-export default function Home() {
-  const slides = projects.filter((p) => p.heroOrder).sort((a, b) => (a.heroOrder ?? 0) - (b.heroOrder ?? 0)).slice(0, 5);
+export default async function Home() {
   const featured = projects.filter((p) => p.featured);
-  const spotlight = featured[0] ?? projects[0];
+  const feed = await getDevFeed();
   return (
     <>
-      <h1 className="visually-hidden">{site.name}: {site.tagline}</h1>
-      <HeroCarousel slides={slides} />
-      <IntentChips />
+      <HomeHero tagline={site.tagline} description={site.description} />
+      <TechTape items={stack} />
+      <Capabilities services={services} />
       <WorkRail projects={featured} />
-      {spotlight && <Spotlight project={spotlight} />}
+      <Pipeline stages={process} />
       <KpiBand metrics={metrics} />
-      <ProcessTabs stages={process} />
-      <NotesFeed notes={notes} />
-      <StackDirectory items={stack} />
+      <Radar notes={notes} feed={feed} />
       <TeamPreview team={team} />
       <ContactCta />
       <OnThisPage />

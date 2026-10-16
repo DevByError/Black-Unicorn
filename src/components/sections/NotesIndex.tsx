@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Icon } from '@/components/ui/Icon';
 import { SHOW_PLACEHOLDER_BADGE } from '@/lib/dev';
 import { formatDate } from '@/lib/format';
 import type { Note } from '@/types/content';
@@ -35,7 +34,7 @@ export function NotesIndex({ notes }: { notes: Note[] }) {
               <span className="mono muted note-row__meta"><time dateTime={n.date}>{formatDate(n.date)}</time> · {n.tags.join(' / ')}</span>
               <span className="note-row__title">{n.title}{SHOW_PLACEHOLDER_BADGE && n.placeholder && <span className="ph-badge">PLACEHOLDER</span>}</span>
               <span className="muted note-row__excerpt">{n.excerpt}</span>
-              <Icon name="arrow-right" className="icon note-row__arrow" />
+              <span className="dot-mark note-row__arrow" aria-hidden="true" />
             </Link>
           </li>
         ))}

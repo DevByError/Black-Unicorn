@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 
 const SECTIONS = [
-  { id: 'work', label: 'Work' }, { id: 'spotlight', label: 'Spotlight' }, { id: 'process', label: 'Process' },
-  { id: 'notes', label: 'Notes' }, { id: 'stack', label: 'Stack' }, { id: 'team', label: 'Team' }, { id: 'contact', label: 'Contact' },
+  { id: 'capabilities', label: 'Capabilities' }, { id: 'work', label: 'Work' }, { id: 'process', label: 'Pipeline' },
+  { id: 'notes', label: 'Radar' }, { id: 'team', label: 'Team' }, { id: 'contact', label: 'Contact' },
 ];
 
 /** Small "On this page" quick menu: desktop only (hidden below 1024px by CSS). A disclosure, not a menu. */

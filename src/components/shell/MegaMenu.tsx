@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 import { projects } from '@/content/projects';
 import type { NavPanel } from '@/types/content';
 import { ProjectThumb } from '@/components/work/ProjectThumb';
@@ -24,7 +23,7 @@ export function MegaPanel({ panel, onNavigate }: { panel: NavPanel; onNavigate: 
                   <span className="mega__link-title">{l.label}</span>
                   {l.description && <span className="mega__link-desc">{l.description}</span>}
                 </span>
-                <Icon name="arrow-right" />
+                <span className="dot-mark" aria-hidden="true" />
               </Link>
             </li>
           ))}

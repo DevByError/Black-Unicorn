@@ -10,6 +10,7 @@ import { Footer } from '@/components/shell/Footer';
 import { Consent } from '@/components/shell/Consent';
 import { RouteAnnouncer } from '@/components/shell/RouteAnnouncer';
 import { Reveals } from '@/components/ui/Reveals';
+import { AmbientBackground } from '@/components/home/AmbientBackground';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SkipLinks />
+        <AmbientBackground />
         <Intro />
         <IntroController />
         <Header />

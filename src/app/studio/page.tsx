@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 import { PageHead } from '@/components/ui/PageHead';
 import { ProcessTabs } from '@/components/sections/ProcessTabs';
 import { StackDirectory } from '@/components/sections/StackDirectory';
@@ -40,7 +39,7 @@ export default function StudioPage() {
       <section className="container section--tight closing" aria-labelledby="close-h">
         <h2 id="close-h" className="h2">Want to build something?</h2>
         <p className="lead">Tell us what you are trying to make.</p>
-        <p><Link href="/contact" className="btn btn--primary">Start a project<Icon name="arrow-right" className="icon btn__arrow" /></Link></p>
+        <p><Link href="/contact" className="btn btn--primary">Start a project</Link></p>
       </section>
     </>
   );

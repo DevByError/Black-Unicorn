@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 import { PageHead } from '@/components/ui/PageHead';
 import { services } from '@/content/services';
 import { SHOW_PLACEHOLDER_BADGE } from '@/lib/dev';
@@ -22,7 +21,7 @@ export default function ServicesPage() {
             <ul className="service__bullets">{s.bullets.map((b) => (<li key={b}>{b}</li>))}</ul>
           </section>
         ))}
-        <p><Link href="/contact" className="btn btn--primary">Start a project<Icon name="arrow-right" className="icon btn__arrow" /></Link></p>
+        <p><Link href="/contact" className="btn btn--primary">Start a project</Link></p>
       </div>
     </>
   );

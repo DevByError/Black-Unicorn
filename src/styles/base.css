@@ -20,6 +20,11 @@ h1, h2, h3, h4 { margin: 0; color: var(--text-strong); line-height: var(--lh-snu
 p { margin: 0; text-wrap: pretty; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 img, svg, video { display: block; max-width: 100%; }
+/* Without this, the width/height HTML attributes map to a presentational `height: <n>px`.
+   That makes both dimensions definite, so any `aspect-ratio` on the element is ignored and
+   the image renders at its full intrinsic height. Components that want a fixed height
+   (.member__photo, .next__art, .spot__half) set one with a class, which still wins. */
+img { height: auto; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { background: none; border: 0; padding: 0; cursor: pointer; }
@@ -58,6 +63,12 @@ button { background: none; border: 0; padding: 0; cursor: pointer; }
 /* Long below-the-fold sections skip rendering work until near the viewport (Part 19.2). */
 .defer-render { content-visibility: auto; contain-intrinsic-size: auto 800px; }
 
+/* ---- One shared living background (see AmbientBackground). Everything else sits above it on the same surface. ---- */
+.ambient-bg { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+main, .site-footer { position: relative; z-index: 1; }
+.step-btn { min-height: 44px; padding: 0 var(--space-4); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font: 500 0.82rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-strong); background: var(--surface); transition: border-color var(--dur-fast), color var(--dur-fast); }
+.step-btn:hover, .step-btn:focus-visible { border-color: var(--accent); color: var(--accent); }
+
 /* ---- Buttons ---- */
 .btn {
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -70,8 +81,14 @@ button { background: none; border: 0; padding: 0; cursor: pointer; }
   content: ''; position: absolute; inset: 0; z-index: -1; transform: scaleX(0); transform-origin: left;
   transition: transform var(--dur-fast) var(--ease-standard);
 }
-.btn .btn__arrow { transition: transform var(--dur-fast) var(--ease-standard); }
-.btn:hover .btn__arrow, .btn:focus-visible .btn__arrow { transform: translateX(4px); }
+.btn::after { /* the brand seam square: turns a quarter on hover, like a part docking into place */
+  content: ''; flex: none; width: 7px; height: 7px; background: currentColor; transform: rotate(45deg);
+  transition: transform var(--dur-base) var(--ease-snap); }
+.btn:hover::after, .btn:focus-visible::after { transform: rotate(135deg) scale(1.3); }
+.btn--ghost::after, .btn--nomark::after { display: none; }
+/* Small diamond used where a link row used to end in an arrow. Rotates when its row is hovered or focused. */
+.dot-mark { display: inline-block; flex: none; width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); transition: transform var(--dur-base) var(--ease-snap); }
+:is(a, button):hover > .dot-mark, :is(a, button):focus-visible > .dot-mark, .pcard:hover .dot-mark, .note-row:hover .dot-mark, .mega__link:hover .dot-mark, .mega__link:focus-visible .dot-mark { transform: rotate(135deg) scale(1.35); }
 .btn--primary { background: var(--accent); color: var(--accent-contrast); }
 .btn--primary::before { background: var(--accent-hover); }
 .btn--primary:hover::before, .btn--primary:focus-visible::before { transform: scaleX(1); }
@@ -141,7 +158,7 @@ html[data-motion='reduce'] *, html[data-motion='reduce'] *::before, html[data-mo
 }
 
 @media print {
-  .site-header, .site-footer, .intro, .intro__skip, .back-to-top, .consent, .skip-links { display: none !important; }
+  .site-header, .site-footer, .intro, .back-to-top, .consent, .skip-links { display: none !important; }
   body { background: #fff; color: #000; }
   a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 0.8em; }
 }

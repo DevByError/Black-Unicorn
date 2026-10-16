@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 
 export const metadata = { title: 'Page not found' };
 
@@ -12,7 +11,7 @@ export default function NotFound() {
       <p className="lead">The link may be old or mistyped. Try search, or head back to the work.</p>
       <p className="nf__actions">
         <Link href="/" className="btn btn--primary">Home</Link>
-        <Link href="/work" className="btn btn--secondary">Work<Icon name="arrow-right" className="icon btn__arrow" /></Link>
+        <Link href="/work" className="btn btn--secondary">Work</Link>
       </p>
     </section>
   );

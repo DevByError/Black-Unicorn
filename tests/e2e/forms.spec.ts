@@ -4,6 +4,7 @@ test.use({ colorScheme: 'dark' });
 
 test('contact form: invalid → summary takes focus → fixed → mailto fallback / unconfigured message', async ({ page }) => {
   await page.goto('/contact?intro=skip');
+  await page.locator('html[data-ready=true]').waitFor({ state: 'attached' });
   await page.waitForTimeout(2200); // minimum fill time (anti-spam)
   await page.getByRole('button', { name: /send message/i }).click();
   const summary = page.getByRole('alert').first();
@@ -25,12 +26,14 @@ test('contact form: success state with a mocked endpoint', async ({ page }) => {
   // Endpoint is a build-time env var; here we simulate it by stubbing fetch and enabling the path via a global.
   await page.route('**/__form__', (r) => r.fulfill({ status: 200, body: '{}' }));
   await page.goto('/contact?intro=skip');
+  await page.locator('html[data-ready=true]').waitFor({ state: 'attached' });
   const hasEndpoint = await page.evaluate(() => !!document.querySelector('form')?.getAttribute('action')?.startsWith('http'));
   test.skip(!hasEndpoint, 'Build has no NEXT_PUBLIC_FORM_ENDPOINT; success path is covered by the unit-level run in README.');
 });
 
 test('honeypot submissions are silently ignored', async ({ page }) => {
   await page.goto('/contact?intro=skip');
+  await page.locator('html[data-ready=true]').waitFor({ state: 'attached' });
   await page.waitForTimeout(2200);
   await page.getByLabel(/Your name/).fill('Bot');
   await page.getByLabel(/Email address/).fill('bot@example.com');

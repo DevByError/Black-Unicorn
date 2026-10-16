@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Icon } from '@/components/ui/Icon';
+import { LogoMark } from '@/components/brand/LogoMark';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { Gallery } from '@/components/work/Lightbox';
-import { ProjectThumb } from '@/components/work/ProjectThumb';
+import { ProjectHero } from '@/components/work/ProjectHero';
 import { labelFor, projects } from '@/content/projects';
 import { site } from '@/content/site';
 import { SHOW_PLACEHOLDER_BADGE } from '@/lib/dev';
@@ -47,7 +47,7 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
           <div><dt>Stack</dt><dd>{p.stack.join(', ')}</dd></div>
         </dl>
       </header>
-      <div className="cover"><ProjectThumb project={p} wide priority /></div>
+      <ProjectHero project={p} />
       <div className="container case">
         <aside className="case__toc" aria-label="In this project">
           <p className="eyebrow">In this project</p>
@@ -71,14 +71,15 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
             <h2 id="s-h" className="h3">Stack and links</h2>
             <ul className="chip-row">{p.stack.map((t) => (<li key={t} className="chip chip--static">{t}</li>))}</ul>
             {p.links && p.links.length > 0 && (
-              <ul className="chip-row">{p.links.map((l) => (<li key={l.href}><a className="btn btn--secondary" href={l.href} rel="noopener noreferrer">{l.label}<Icon name="arrow-up-right" className="icon btn__arrow" /></a></li>))}</ul>
+              <ul className="chip-row">{p.links.map((l) => (<li key={l.href}><a className="btn btn--secondary" href={l.href} rel="noopener noreferrer">{l.label}</a></li>))}</ul>
             )}
           </section>
         </div>
       </div>
+      {/* The strip always shows the flat brand tile, never the next project's cover; the cover appears on that project's own page. */}
       {next && next.slug !== p.slug && (
         <Link href={`/work/${next.slug}`} className="next" aria-label={`Next project: ${next.title}`}>
-          <span className="next__art" aria-hidden="true"><ProjectThumb project={next} wide /></span>
+          <span className="next__art" aria-hidden="true"><span className="thumb-ph"><LogoMark variant="simple" className="thumb-ph__mark" /></span></span>
           <span className="container next__text"><span className="eyebrow">Next project</span><span className="h2">{next.title}</span></span>
           <span className="next__seam" aria-hidden="true" />
         </Link>

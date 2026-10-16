@@ -55,7 +55,7 @@ function Kpi({ m }: { m: Metric }) {
 export function KpiBand({ metrics }: { metrics: Metric[] }) {
   return (
     <section className="section container defer-render" aria-labelledby="kpi-h">
-      <div className="section__head"><div><p className="eyebrow" data-reveal>By the numbers</p><h2 id="kpi-h" className="h2" data-reveal data-reveal-index={1}>BlackUnicorn by the numbers</h2></div></div>
+      <div className="sec-head"><p className="sec-head__tag mono" data-reveal><span>04</span> numbers</p><h2 id="kpi-h" className="h2" data-reveal data-reveal-index={1}>The scoreboard</h2></div>
       <div className="kpis">{metrics.map((m) => (<Kpi key={m.id} m={m} />))}</div>
     </section>
   );

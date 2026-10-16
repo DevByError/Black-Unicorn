@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatDate, isRecent, readingMinutes } from '../../src/lib/format';
 import { DOT, RING_CENTER, tickSegments } from '../../src/lib/logo-geometry';
+import { getDevFeed, parseDevTo } from '../../src/lib/feed';
 import { scoreDoc, search, type SearchDoc } from '../../src/lib/search';
 
 const doc = (o: Partial<SearchDoc> = {}): SearchDoc => ({ type: 'Work', title: 'Alpha build', href: '/work/a', summary: 'A short summary', tags: ['web'], ...o });
@@ -53,5 +54,38 @@ describe('logo geometry', () => {
   });
   it('places the dot inside the ring', () => {
     expect(Math.hypot(DOT.cx - RING_CENTER.x, DOT.cy - RING_CENTER.y)).toBeLessThan(160);
+  });
+});
+
+describe('dev feed', () => {
+  const art = (o: Record<string, unknown> = {}) => ({ title: 'T', url: 'https://dev.to/a/b', tag_list: ['webdev', 'a11y', 'x', 'y'], reading_time_minutes: 4, positive_reactions_count: 12, user: { name: 'Ada' }, published_at: '2026-10-01T10:00:00Z', ...o });
+  it('keeps only well-formed dev.to articles and trims tags to three', () => {
+    const out = parseDevTo([art(), art({ title: '' }), art({ url: 'https://evil.example/x' }), art({ url: 'javascript:alert(1)' }), art({ url: 'http://dev.to/insecure' }), null, 'junk']);
+    expect(out).toHaveLength(1);
+    expect(out[0]).toMatchObject({ title: 'T', author: 'Ada', minutes: 4, reactions: 12 });
+    expect(out[0]?.tags).toEqual(['webdev', 'a11y', 'x']);
+  });
+  it('returns nothing for a non-array response and respects the limit', () => {
+    expect(parseDevTo({ error: 'rate limited' })).toEqual([]);
+    expect(parseDevTo(Array.from({ length: 20 }, () => art()), 6)).toHaveLength(6);
+  });
+  it('falls back to the curated list when switched off or the network fails', async () => {
+    process.env.BU_FEED = 'off';
+    const off = await getDevFeed();
+    expect(off.mode).toBe('curated');
+    expect(off.items.length).toBeGreaterThanOrEqual(3);
+    delete process.env.BU_FEED;
+    const real = globalThis.fetch;
+    globalThis.fetch = (() => Promise.reject(new Error('offline'))) as typeof fetch;
+    try { expect((await getDevFeed()).mode).toBe('curated'); } finally { globalThis.fetch = real; }
+  });
+  it('uses live items when the API answers', async () => {
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => new Response(JSON.stringify([art({ title: 'A', url: 'https://dev.to/a/1' }), art({ title: 'B', url: 'https://dev.to/a/2' }), art({ title: 'C', url: 'https://dev.to/a/3' })]), { status: 200 })) as typeof fetch;
+    try {
+      const f = await getDevFeed();
+      expect(f.mode).toBe('live');
+      expect(f.items.map((i) => i.title)).toEqual(['A', 'B', 'C']);
+    } finally { globalThis.fetch = real; }
   });
 });

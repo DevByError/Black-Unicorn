@@ -7,8 +7,6 @@ export const metadata = pageMetadata({ title: 'Privacy', description: 'Exactly w
 const KEYS: [string, string, string][] = [
   ['bu:theme', 'Your light or dark theme choice.', 'Until you clear site data'],
   ['bu:motion', 'Whether you chose to reduce or allow motion.', 'Until you clear site data'],
-  ['bu:intro-session', 'That the opening animation already played in this tab, so it does not repeat.', 'Until you close the tab (session storage)'],
-  ['bu:intro-last', 'When the opening animation last played, so a short version plays within 7 days.', 'Until you clear site data'],
   ['bu:consent', 'Your analytics choice. Only created if analytics is ever switched on.', '12 months'],
 ];
 

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const ROUTES = ['/', '/work', '/work/project-one', '/services', '/studio', '/notes', '/notes/note-one', '/contact', '/privacy', '/accessibility', '/does-not-exist'];
+const ROUTES = ['/', '/work', '/work/signcraft', '/work/2d-spriteforge', '/services', '/studio', '/notes', '/notes/budget-milliseconds-first', '/contact', '/privacy', '/accessibility', '/does-not-exist'];
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 async function audit(page: Page, label: string) {

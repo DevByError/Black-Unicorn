@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 import { SHOW_PLACEHOLDER_BADGE } from '@/lib/dev';
 import type { TeamMember } from '@/types/content';
 
@@ -25,9 +24,9 @@ export function TeamCard({ m }: { m: TeamMember }) {
 export function TeamPreview({ team }: { team: TeamMember[] }) {
   return (
     <section id="team" className="section container defer-render" aria-labelledby="team-h">
-      <div className="section__head">
-        <div><p className="eyebrow" data-reveal>Team</p><h2 id="team-h" className="h2" data-reveal data-reveal-index={1}>The people behind it</h2></div>
-        <Link href="/studio#team" className="btn btn--secondary">Meet the team<Icon name="arrow-right" className="icon btn__arrow" /></Link>
+      <div className="sec-head sec-head--row">
+        <div><p className="sec-head__tag mono" data-reveal><span>06</span> team</p><h2 id="team-h" className="h2" data-reveal data-reveal-index={1}>The people behind the commits</h2></div>
+        <Link href="/studio#team" className="btn btn--secondary">Meet the team</Link>
       </div>
       <div className="team">{team.slice(0, 4).map((m) => (<TeamCard key={m.id} m={m} />))}</div>
     </section>

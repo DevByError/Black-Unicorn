@@ -1,6 +1,5 @@
 /**
- * First focusable elements on every page (Part 15.1). "Skip intro" is the intro's own button, which is
- * focused programmatically while the intro runs; this link serves everyone afterwards.
+ * First focusable elements on every page (Part 15.1).
  */
 export function SkipLinks() {
   return (

@@ -45,8 +45,8 @@ export function Gallery({ images, title }: { images: ImageAsset[]; title: string
             <img src={img.src} alt={img.alt} width={img.width} height={img.height} />
             <p className="mono muted" aria-live="polite">{(open ?? 0) + 1} / {count}</p>
             <div className="lightbox__nav">
-              <button type="button" className="icon-btn" onClick={() => go((open ?? 0) - 1)}><Icon name="arrow-left" /><span className="visually-hidden">Previous image</span></button>
-              <button type="button" className="icon-btn" onClick={() => go((open ?? 0) + 1)}><Icon name="arrow-right" /><span className="visually-hidden">Next image</span></button>
+              <button type="button" className="step-btn" onClick={() => go((open ?? 0) - 1)}>Prev<span className="visually-hidden"> image</span></button>
+              <button type="button" className="step-btn" onClick={() => go((open ?? 0) + 1)}>Next<span className="visually-hidden"> image</span></button>
             </div>
           </div>
         )}

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icon';
 import { SHOW_PLACEHOLDER_BADGE } from '@/lib/dev';
 import { isRecent } from '@/lib/format';
 import { labelFor } from '@/content/projects';
@@ -23,9 +22,11 @@ interface Props {
 export function ProjectCard({ project: p, ratio = 'landscape', expandable = false, track = 'work.card', index = 0 }: Props) {
   const isNew = isRecent(p.published);
   return (
-    <article className={`pcard pcard--${ratio}`} data-reveal data-reveal-index={index} data-track={track}>
+    // This card hydrates late (WorkIndex sits in a Suspense boundary for useSearchParams), after <Reveals> has already
+    // added `is-in` and --reveal-delay to the server HTML. That is expected, so the attribute diff is suppressed here.
+    <article className={`pcard pcard--${ratio}`} data-reveal data-reveal-index={index} data-track={track} suppressHydrationWarning>
       <div className="pcard__media">
-        <ProjectThumb project={p} wide />
+        <ProjectThumb project={p} wide sizes="(min-width: 1100px) 400px, (min-width: 700px) 46vw, 88vw" />
         <span className="pcard__seam" aria-hidden="true" />
         {(isNew || p.featured) && (
           <span className="pcard__badges">
@@ -44,7 +45,7 @@ export function ProjectCard({ project: p, ratio = 'landscape', expandable = fals
         {expandable && <CardExpander id={`more-${p.slug}`}>{p.challenge}</CardExpander>}
         <p className="pcard__meta">
           <span className="mono muted">{p.year}</span>
-          <span className="pcard__cta">Read the case study<Icon name="arrow-right" className="icon pcard__arrow" /></span>
+          <span className="pcard__cta">Read the case study<span className="dot-mark pcard__arrow" aria-hidden="true" /></span>
         </p>
       </div>
     </article>

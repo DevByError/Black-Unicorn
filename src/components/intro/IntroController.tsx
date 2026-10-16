@@ -7,16 +7,18 @@ import './intro.css';
 let started = false;
 
 /**
- * Starts the intro after hydration. GSAP lives in a separate dynamically imported chunk so it never blocks
- * first paint (Part 13.13). If the chunk fails, the overlay is removed and the site is usable.
- * Accessibility contract: header/main/footer are `inert` while the intro runs; Skip intro takes focus.
+ * Starts the intro after hydration. The runtime is a small dynamically imported chunk so it never blocks first paint.
+ * If it fails to load, the overlay is removed and the site is usable.
+ * Accessibility contract: header/main/footer are `inert` while the intro runs. Escape ends it early.
  */
 export function IntroController() {
   useEffect(() => {
     const mode = document.documentElement.getAttribute('data-intro');
+    // Reload: the browser may restore the old scroll position after the pre-paint script ran. Start at the top.
+    if (document.documentElement.getAttribute('data-nav') === 'reload') window.scrollTo(0, 0);
     if (started) return;
     started = true;
-    if (mode !== 'full' && mode !== 'short' && mode !== 'reduced') {
+    if (mode !== 'full' && mode !== 'reduced') {
       finishIntro(false);
       return;
     }

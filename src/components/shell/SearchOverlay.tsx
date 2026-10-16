@@ -66,7 +66,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
           {q.trim() && count === 0 && docs && (
             <div className="search__empty">
               <p className="h4">Nothing found for &ldquo;{q}&rdquo;. Try a shorter word, or browse all work.</p>
-              <Link href="/work" className="btn btn--secondary" onClick={onClose}>Browse all work<Icon name="arrow-right" className="icon btn__arrow" /></Link>
+              <Link href="/work" className="btn btn--secondary" onClick={onClose}>Browse all work</Link>
             </div>
           )}
           {failed && <p className="muted">Search could not load. <Link className="link-inline" href="/work" onClick={onClose}>Browse all work</Link> instead.</p>}
